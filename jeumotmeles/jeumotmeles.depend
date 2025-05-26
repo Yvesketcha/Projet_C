@@ -1,0 +1,22 @@
+# depslib dependency file v1.0
+1748107516 source:c:\cours\programmationc\jeumotmeles\jeumotmeles\grille.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"grille.h"
+
+1748243863 c:\cours\programmationc\jeumotmeles\jeumotmeles\grille.h
+
+1748244013 source:c:\cours\programmationc\jeumotmeles\jeumotmeles\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"grille.h"
+	"mots.h"
+
+1748242803 source:c:\cours\programmationc\jeumotmeles\jeumotmeles\mots.c
+	<stdio.h>
+	<stdlib.h>
+
+1748245604 c:\cours\programmationc\jeumotmeles\jeumotmeles\mots.h
+
