@@ -1,9 +1,14 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include<string.h>
-#include "grille.h"
+#include<time.h>
 
-void LettreAleatoire()
+#include "grille.h"
+#include "affichage.h"
+
+
+//Fonction permettant de generer des lettres de manieres aleatoires
+char LettreAleatoire()
 {
     return 'A' + rand()%26;
 }
@@ -11,76 +16,35 @@ void LettreAleatoire()
 // Iniatiliser la grille vide
 void Grillevide(Grille *g, int lignes, int colonnes)
 {
+    int i;
+    int j;
     g->lignes = lignes;
     g->colonnes = colonnes;
     for(i = 0; i < lignes; i++)
     {
         for(j = 0; j < colonnes; j++)
         {
-            g->grille[i][j].lettre == '';
+            g->grille[i][j].lettre = ' ';
+            g->grille[i][j].lettreselectionne = 0;
             g->grille[i][j].lettretrouve = 0;
         }
     }
 }
 
-// Afficher la grille dans la console
-void LireGrille(Grille *g)
-{
-    for(i = 0; i < g->lignes; i++)
-    {
-        for(j = 0; j < g->colonnes; j++)
-        {
-            HANDLE h = GetStdHandle ( STD_OUTPUT_HANDLE);
-            WORD wOldColorAttrs;
-            CONSOLE_SCREEN_BUFFER_INFO csbiInfo;
-
-
-
-            GetConsoleScreenBufferInfo(h, &csbiInfo);
-            wOldColorAttrs = csbiInfo.wAttributes;
-
-            //Definie la nouvelle information de couleur
-
-            SetConsoleTextAttribute ( h, color[i][j] );
-
-
-            //Retrouve la couleur originale
-
-            printf("%c", g->grille[i][j].lettre);
-            SetConsoleTextAttribute ( h, wOldColorAttrs);
-        }
-        printf("\n");
-    }
-}
-
-//Enum direction
-//Enumerateur pour la direction dans la grille, dans laquelle le mot est insere.
-enum direction
-{
-    UP = 1,
-    DOWN,
-    LEFT,
-    RIGHT,
-    UP_LEFT,
-    UP_RIGHT,
-    DOWN_LEFT,
-    DOWN_RIGHT
-};
-
 char input[10];//Les mots qui sont inseres dans la grille
 int input_point[10][3]; //Les coordonnees x, y et la direction des mots inseres dans la grille
-int mark[10]= {0} // utilise pour marquer les mots identifies par l'utilisateur afin qu'un reponse en double ne soit pas acceptees
+int mark[10]= {0}; // utilise pour marquer les mots identifies par l'utilisateur afin qu'une reponse en double ne soit pas acceptees
 
-int flag //flag
+int flag = 0; //flag
 
 struct point shift_point(struct point start, enum direction d) //Start est la position du point a decaler dans la grille, est la direction dans laquelle le point se deplace
 {
     int i = start.x;
     int j = start.y;
-    struct point new_point; //La position finale du point decale depends de la direction d
+    struct point new_point = start; //La position finale du point decale depends de la direction d
     switch(d)
     {
-    //Huits directions dans laquelle le curseur peut se deplacer
+    //Huits directions dans laquelle le point peut se deplacer et permet aussi de gerer les debordements
     case UP:
         new_point.x = i-1;//Deplacement vers le haut
         new_point.y = j;
@@ -119,63 +83,54 @@ struct point shift_point(struct point start, enum direction d) //Start est la po
         break;
     }
     //Gerer les erreurs hors limites
-    if(new_point.x < -1 || new_point.x > gridsize || new_point.y < -1 || new_point.y > gridsize)
+    /*if(new_point.x < -1 || new_point.x > gridsize || new_point.y < -1 || new_point.y > gridsize)
     {
-        flag = 1;//Gestion des exceptions
-    }
+        flag = 1;//Gestion des exceptions debordement
+    }*/
     return new_point;//Retourne le nouveau point
 
 };
 
-char nullchar = 'Z';
+//char nullchar = 'Z';
 
-int Verificationinsertionmot(char* word, Grille *g, struct point start, enum direction d) //Fonction permettant de verifier si un mot peut etre insere dans la grille dans cette position ou pas
+enum direction arr[10]=
 {
-    int i = 0;
-    struct point new_point = start;
-    while(i < (int)strlen(word))//parcourt le tableau de caractere du mot
-    {
-        //Tenter de deplacer le point vers le nouveau point
-        if(g->grille[new_point.x][new_point.y] == nullchar || g->grille[new_point.x][new_point.y] == word[i])
-        {
-            new_point = shift_point(new_point, d);
-            i++;
-        }
-        else{
-            return 0;//Si le mot ne peut pas etre insere renvoie faux
-        }
-        if(flag == 1){
-            return 0;//Cet indicateur dans a fonction de decalage de point en raison d'une exception de limites du tableau
-        }
-        return 1;//Peut etre insere donc retourne vraie
-    }
-}
-int arr[10]={1,2,3,4,5,6,1,2,3,4}//ce tableau assure une division de 40, 40, 20 pour cent des mots dans les directions horizontale, verticale et diagonale
+    UP,
+    DOWN,
+    LEFT,
+    RIGHT,
+    UP_LEFT,
+    UP_RIGHT,
+    DOWN_LEFT,
+    DOWN_RIGHT,
+    LEFT,
+    RIGHT
+};
 int p = 0;//utilisé comme index pour parcourir le tableau ci-dessus arr
 
 void Insertionmotgrille(char *word, Grille *g, int i) //Fonction pour inserer un mot dans la grille
 {
     //i signifie que le ieme mot est en cours d'insertion
     struct point place;//point ou le mot va etre insere dans la grille
-    enum direction d;
+    enum direction d;//direction dans laquelle le mot va s'orienter
     do
     {
-        place.x = rand() % gridsize;//definie une ligne de maniere aleatoire
-        place.y = rand() % gridsize;//definie une colonne de maniere aleatoire
-        d = (arr[(p++)%10]);// Obtenir une direction selon la regle specifie
+        place.x = rand() % g->lignes;//definie une ligne de maniere aleatoire
+        place.y = rand() % g->colonnes;//definie une colonne de maniere aleatoire
+        d = (arr[(p++) %10]);// Obtenir une direction selon la regle specifie
     }
-    while(!Verificationinsertionmot());
+    while(!Verificationinsertionmot(word, g, place, d));
 
     int j = 0;//Boucle variable
 
     struct point new_point = place;//Copie de la valeur de la structure place dans la valeur de la structure new_point
     while(j < (int)strlen(word))
     {
-        g->grille[new_point.x][new_point.y] == (char)toupper(word[j]);//Insertion dans la grille
+        g->grille[new_point.x][new_point.y].lettre = (char)toupper(word[j]);//Insertion dans la grille
         new_point = shift_point(new_point, d);//Deplacement accorde a la direction
         j++;
     }
-    input_point[i][0] = place.x//utilise pour modifier la grille ulterieurement lorsque l'utilisateur entre un mot correct
+    input_point[i][0] = place.x;//utilise pour modifier la grille ulterieurement lorsque l'utilisateur entre un mot correct
     input_point[i][1] = place.y;
     input_point[i][2] = d;
 }
@@ -187,10 +142,15 @@ void remplissagegrille(Grille *g) //Fonction pour le remplissage de la grille
     {
         for(int j = 0; j < g->colonnes; j++)
         {
-            if(g->grille[i][j] == '')
+            if(g->grille[i][j].lettre == ' ')
             {
-                g->grille[i][j] = LettreAleatoire();
+                g->grille[i][j].lettre = LettreAleatoire();
             }
         }
     }
+}
+
+void changertaillegrille(Grille *g, int lignes, int colonnes){
+    printf("Veuillez entrez la taille de la grille par exemple: (10x10)");
+    printf("Entrez la taille des lignes")
 }

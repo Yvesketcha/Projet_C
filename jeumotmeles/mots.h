@@ -1,11 +1,12 @@
 #ifndef MOTS_H_INCLUDED
 #define MOTS_H_INCLUDED
 
-#define max_words 5
-#define max_words_len 10
+#define max_words 11
+#define max_words_len 15
+#include "grille.h"
 
 typedef struct{
-    mot char[max_words_len];
+    char mot[max_words_len];
     int trouve;// 1 trouve, 0 pas encore trouve
 }Mot;
 
@@ -14,6 +15,8 @@ typedef struct{
     int nbmots;
 }Listemots;
 
-chargerMotsDepuisFichier(const char *Animaux, ListeMots *liste);
+int chargerMotsFichier(const char *Theme, Listemots *listes);
+int Verificationinsertionmot(char* word, Grille *g, struct point start, enum direction d);
+void ajouterTheme(const char *Theme, Listemots *listes);
 
 #endif // MOTS_H_INCLUDED

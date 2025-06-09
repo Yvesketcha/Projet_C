@@ -1,31 +1,48 @@
 #ifndef GRILLE_H_INCLUDED
 #define GRILLE_H_INCLUDED
 
-#define gridsize 10
-#define colorsize 10
+#define gridsize 15
+#define decalage 70
+
 typedef struct
 {
     char lettre;
-    int lettretrouve //1 si la lettre fait partie d'in mot trouve
+    int lettreselectionne; //1 si la case est selectionne temporairement(jaune)
+    int lettretrouve; //1 si la lettre fait partie d'in mot trouve
 } Case;
 
 typedef struct
 {
     Case grille[gridsize][gridsize];
-    int color[colorsize][colorsize];
     int lignes;
     int colonnes;
 } Grille;
 
-typedef struct
+struct point
 {
     int x;
     int y;
-} point;
+};
+
+//Enum direction
+//Enumerateur pour la direction dans la grille, dans laquelle le mot est insere.
+
+enum direction
+{
+    UP,
+    DOWN,
+    LEFT,
+    RIGHT,
+    UP_LEFT,
+    UP_RIGHT,
+    DOWN_LEFT,
+    DOWN_RIGHT
+};
 
 void Grillevide(Grille *g, int lignes, int colonnes);
-void LireGrille(Grille *g);
-void Insertionmotgrille(char *word, int i);
+void Insertionmotgrille(char *word, Grille *g, int i);
 void remplissagegrille(Grille *g);
+char LettreAleatoire();
+struct point shift_point(struct point start, enum direction d);
 
 #endif // GRILLE_H_INCLUDED

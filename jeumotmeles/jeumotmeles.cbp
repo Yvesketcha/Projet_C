@@ -31,10 +31,33 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
+		<Unit filename="Theme/Afrique.txt" />
+		<Unit filename="Theme/Animaux.txt" />
+		<Unit filename="Theme/Fruit.txt" />
+		<Unit filename="Theme/Pays.txt" />
+		<Unit filename="affichage.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="affichage.h" />
+		<Unit filename="grille.c">
+			<Option compilerVar="CC" />
+		</Unit>
 		<Unit filename="grille.h" />
+		<Unit filename="jeu.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="jeu.h" />
 		<Unit filename="main.c">
 			<Option compilerVar="CC" />
 		</Unit>
+		<Unit filename="mots.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="mots.h" />
+		<Unit filename="saisir.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="saisir.h" />
 		<Extensions />
 	</Project>
 </CodeBlocks_project_file>
