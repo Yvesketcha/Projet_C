@@ -32,6 +32,10 @@ touche liretouche(){//Fonction la gestion des touches de directions du curseur
             case '8': return TOUCHE_UP;
             case '4': return TOUCHE_LEFT;
             case '6': return TOUCHE_RIGHT;
+            case '7': return TOUCHE_UP_LEFT;
+            case '9': return TOUCHE_UP_RIGHT;
+            case '1': return TOUCHE_DOWN_LEFT;
+            case '3': return TOUCHE_DOWN_RIGHT;
             case ' ': return TOUCHE_SPACE;
             case 'q': case 'Q': return TOUCHE_EXIT;
             default: return TOUCHE_AUCUNE;
@@ -56,6 +60,34 @@ void deplacementcurseur(struct point *curseur, touche direction, int ligmax, int
                 break;
             case TOUCHE_RIGHT:
                 if(curseur->y < colmax - 1){
+                    curseur->y++;
+                }
+                break;
+            case TOUCHE_UP_LEFT:
+                if (curseur->x > 0 && curseur->y > 0)
+                {
+                    curseur->x--;
+                    curseur->y--;
+                }
+                break;
+            case TOUCHE_UP_RIGHT:
+                if (curseur->x > 0 && curseur->y < colmax - 1)
+                {
+                    curseur->x--;
+                    curseur->y++;
+                }
+                break;
+            case TOUCHE_DOWN_LEFT:
+                if (curseur->x < ligmax - 1 && curseur->y > 0)
+                {
+                    curseur->x++;
+                    curseur->y--;
+                }
+                break;
+            case TOUCHE_DOWN_RIGHT:
+                if (curseur->x < ligmax - 1 && curseur->y < colmax - 1)
+                {
+                    curseur->x++;
                     curseur->y++;
                 }
                 break;

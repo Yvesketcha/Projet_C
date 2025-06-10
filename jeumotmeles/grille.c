@@ -150,7 +150,16 @@ void remplissagegrille(Grille *g) //Fonction pour le remplissage de la grille
     }
 }
 
-void changertaillegrille(Grille *g, int lignes, int colonnes){
-    printf("Veuillez entrez la taille de la grille par exemple: (10x10)");
-    printf("Entrez la taille des lignes")
+void changertaillegrille(Grille *g, int *lignes, int *colonnes){
+    printf("Veuillez entrez la taille de la grille par exemple: (10x10)\n");
+    printf("Entrez la taille des lignes: \n");
+    scanf("%d", lignes);
+    printf("Entrez la taille des colonnes: \n");
+    scanf("%d", colonnes);
+    //verifier que les dimensions sont valides(non valides et raisonnable)
+    if(*lignes <= 0 || *colonnes <= 0 || *lignes > gridsize || *colonnes > gridsize){
+       printf("Taille de la grille invalide, utilisation de la taille par defaut (%dx%d) \n", gridsize, gridsize);
+       *lignes = gridsize;
+       *colonnes = gridsize;
+    }
 }

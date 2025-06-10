@@ -6,7 +6,7 @@
 /*#include "grille.h"
 #include "mots.h"*/
 
-void CommencerJeu(const char *Theme, int lignes, int colonnes);
+void CommencerJeu(const char *Theme, int lignes, int colonnes, const char *nomjoueur);
 void nettoyerselection(Grille *g);
 void marqueselection(Grille *g, struct point start, struct point end);
 char *extractionmot(Grille *g, struct point start,struct point end);

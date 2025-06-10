@@ -109,7 +109,7 @@ void marquemottrouve(Listemots *listes, char *word){//cette fonction permet de m
     }
 }
 
-void CommencerJeu(const char *Theme, int lignes, int colonnes)
+void CommencerJeu(const char *Theme, int lignes, int colonnes, const char *nomjoueur)
 {
     Grille g;//Declaration de la grille principale de jeu
     Listemots listes;//Listes de mots a rechercher dans la grille
@@ -152,7 +152,7 @@ void CommencerJeu(const char *Theme, int lignes, int colonnes)
     system("cls");//pour effacer l'ecran
 
     clock_t temps_debut = clock();
-    int temps_limite = 240;//4 minutes
+    int temps_limite = 60;//4 minutes
     int temps_restant = temps_limite;
 
     LireGrille(&g, &curseur, &start, &end, &listes, &score, temps_restant);//Appel de la fonction pour l'affichage de la grille
@@ -237,12 +237,18 @@ void CommencerJeu(const char *Theme, int lignes, int colonnes)
                     if(trouve){
                         score += 10;//En cas de bonne reponse ajout de 10 points
                         marque_valide(&g, start, end);
-                        Beep(1000, 100);
+                        //Beep(1000, 100);
+                        for(int i = 0; i < 3; i++){
+                            Beep(1400, 200);
+                        }
                     }
                     else{
                         score -= 5;//Penalite de 5 points en cas de mauvaise reponse
                         nettoyerselection(&g);
-                        Beep(750, 200);
+                        for(int i = 0; i < 2; i++){
+                            Beep(1000, 150);
+                            //Sleep(50);
+                        }
                     }
                 }
                 start.x = -1;
@@ -269,6 +275,8 @@ void CommencerJeu(const char *Theme, int lignes, int colonnes)
             //printf("Apres deplacement position curseur: (x=%d, y=%d)\n", wherex(), wherey());
         }
     }
+    enreigistrerscore(nomjoueur, score);
+    printf("\n%s, votre score final est : %d points\n", nomjoueur, score);
 }
 
 enum direction determinedirectionpoint(struct point start, struct point end){

@@ -44,5 +44,6 @@ void Insertionmotgrille(char *word, Grille *g, int i);
 void remplissagegrille(Grille *g);
 char LettreAleatoire();
 struct point shift_point(struct point start, enum direction d);
+void changertaillegrille(Grille *g, int *lignes, int *colonnes);
 
 #endif // GRILLE_H_INCLUDED
