@@ -1,0 +1,74 @@
+# depslib dependency file v1.0
+1749740156 source:c:\cours\programmationc\jeumotmeles\jeumotmeles\grille.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<time.h>
+	"grille.h"
+	"affichage.h"
+
+1749607718 c:\cours\programmationc\jeumotmeles\jeumotmeles\grille.h
+
+1750041693 source:c:\cours\programmationc\jeumotmeles\jeumotmeles\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<windows.h>
+	<time.h>
+	"grille.h"
+	"mots.h"
+	"jeu.h"
+	"saisir.h"
+
+1749317964 source:c:\cours\programmationc\jeumotmeles\jeumotmeles\mots.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"mots.h"
+	"grille.h"
+
+1749218545 c:\cours\programmationc\jeumotmeles\jeumotmeles\mots.h
+	"grille.h"
+
+1750041408 source:c:\cours\programmationc\jeumotmeles\jeumotmeles\jeu.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<time.h>
+	<conio.h>
+	<windows.h>
+	"jeu.h"
+	"grille.h"
+	"mots.h"
+	"affichage.h"
+	"saisir.h"
+
+1750041426 c:\cours\programmationc\jeumotmeles\jeumotmeles\jeu.h
+	"grille.h"
+	"mots.h"
+	"mots.h"
+
+1749611795 source:c:\cours\programmationc\jeumotmeles\jeumotmeles\affichage.c
+	<stdio.h>
+	<stdlib.h>
+	<windows.h>
+	"affichage.h"
+	"grille.h"
+	"mots.h"
+	"saisir.h"
+
+1749609457 c:\cours\programmationc\jeumotmeles\jeumotmeles\affichage.h
+	"grille.h"
+	"mots.h"
+	"saisir.h"
+
+1749726687 source:c:\cours\programmationc\jeumotmeles\jeumotmeles\saisir.c
+	<stdio.h>
+	<windows.h>
+	<conio.h>
+	"grille.h"
+	"saisir.h"
+
+1749606322 c:\cours\programmationc\jeumotmeles\jeumotmeles\saisir.h
+	"grille.h"
+

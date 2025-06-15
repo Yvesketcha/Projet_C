@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="jeumotmeles" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="Debug">
+				<Option output="bin/Debug/jeumotmeles" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Debug/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-g" />
+				</Compiler>
+			</Target>
+			<Target title="Release">
+				<Option output="bin/Release/jeumotmeles" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Release/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-O2" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+				</Linker>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="-Wall" />
+		</Compiler>
+		<Unit filename="Theme/Afrique.txt" />
+		<Unit filename="Theme/Animaux.txt" />
+		<Unit filename="Theme/Fruit.txt" />
+		<Unit filename="Theme/Pays.txt" />
+		<Unit filename="affichage.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="affichage.h" />
+		<Unit filename="grille.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="grille.h" />
+		<Unit filename="jeu.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="jeu.h" />
+		<Unit filename="main.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="mots.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="mots.h" />
+		<Unit filename="saisir.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="saisir.h" />
+		<Extensions />
+	</Project>
+</CodeBlocks_project_file>
